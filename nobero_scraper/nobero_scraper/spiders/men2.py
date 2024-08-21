@@ -37,6 +37,7 @@ class MenSpider(scrapy.Spider):
             "url": response.url,
             "title": response.css("h1::text").get().strip(),
             "price": self.extract_price(response),
+            "product_urls": self.extract_product_images(response),
             "MRP": self.extract_mrp(response),
             "last_7_day_sale": self.extract_last_7_day_sale(response),
             "available_skus": self.extract_skus(response),
@@ -96,26 +97,26 @@ class MenSpider(scrapy.Spider):
         return skus
 
     def extract_fit(self, response):
-        return response.css(".product-metafields-values:contains('Fit') p::text").get().strip()
+        return response.css(".product-metafields-values:contains('Fit') p::text").get()
 
     def extract_fabric(self, response):
-        return response.css(".product-metafields-values:contains('Fabric') p::text").get().strip()
+        return response.css(".product-metafields-values:contains('Fabric') p::text").get()
 
     def extract_neck(self, response):
-        return response.css(".product-metafields-values:contains('Neck') p::text").get().strip()
+        return response.css(".product-metafields-values:contains('Neck') p::text").get()
 
     def extract_sleeve(self, response):
-        return response.css(".product-metafields-values:contains('Sleeve') p::text").get().strip()
+        return response.css(".product-metafields-values:contains('Sleeve') p::text").get()
 
     def extract_pattern(self, response):
-        return response.css(".product-metafields-values:contains('Pattern') p::text").get().strip()
+        return response.css(".product-metafields-values:contains('Pattern') p::text").get()
 
     def extract_length(self, response):
-        return response.css(".product-metafields-values:contains('Length') p::text").get().strip()
+        return response.css(".product-metafields-values:contains('Length') p::text").get()
 
     def extract_description(self, response):
         description_html = response.css('#description_content').get()
-        description = response.css('#description_content').xpath('string()').get().strip()
+        description = response.css('#description_content').xpath('string()').get()
         description = ' '.join(description.split())
         description = description.replace('\n', ' ').replace('• ', '\n• ')
         description = description.replace('\n ', '\n').replace('  ', ' ')
