@@ -4,6 +4,10 @@ from .models import Product
 from .serializers import ProductSerializer
 import json
 from django.conf import settings
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets
+from .models import Product
+from .serializers import ProductSerializer
 
 class ProductPagination(PageNumberPagination):
     page_size = 10
@@ -26,3 +30,13 @@ class ProductListCreateView(generics.ListCreateAPIView):
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = {
+        'price': ['lt', 'gt'],
+        'available_skus__color': ['exact'],
+        'category': ['exact'],
+    }

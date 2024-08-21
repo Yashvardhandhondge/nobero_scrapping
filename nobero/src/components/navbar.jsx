@@ -3,10 +3,14 @@ import '../index.css';
 
 const Navbar = () => {
     return (
-        <nav className="flex items-center justify-between px-8 py-4 bg-white shadow">
+        <nav className="sticky top-0 z-50 flex items-center justify-between px-8 py-4 bg-white shadow">
             {/* Logo */}
             <div className="flex items-center space-x-4">
-                <img src="https://nobero.com/cdn/shop/files/Nobero_logo_1_2.svg?v=1694697396" alt="Nobero Logo" className="h-10" /> {/* Replace with actual logo */}
+                <img 
+                    src="https://nobero.com/cdn/shop/files/Nobero_logo_1_2.svg?v=1694697396" 
+                    alt="Nobero Logo" 
+                    className="h-10" 
+                />
             </div>
 
             {/* Navigation Links */}
@@ -37,8 +41,16 @@ const Navbar = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 104.35 4.35a7.5 7.5 0 0012.3 12.3z" />
                     </svg>
                 </div>
-                <img src="https://nobero.com/cdn/shop/t/199/assets/icon-kwikpass-login.svg?v=153304588784742675891701235538" alt="User Icon" className="h-6 w-6" /> {/* Replace with actual icon */}
-                <img src="/path/to/cart-icon.png" alt="Cart Icon" className="h-6 w-6" /> {/* Replace with actual icon */}
+                <img 
+                    src="https://nobero.com/cdn/shop/t/199/assets/icon-kwikpass-login.svg?v=153304588784742675891701235538" 
+                    alt="User Icon" 
+                    className="h-6 w-6" 
+                />
+                <img 
+                    src="/path/to/cart-icon.png" 
+                    alt="Cart Icon" 
+                    className="h-6 w-6" 
+                />
             </div>
         </nav>
     );
