@@ -1,3 +1,8 @@
+
+/**
+ * Banner component displays a full-width banner image.
+ * The image covers the entire width of its container while maintaining its aspect ratio.
+ */
 import React from 'react';
 import '../index.css';
 const Banner = () => {

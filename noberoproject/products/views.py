@@ -1,3 +1,10 @@
+
+# This code defines a set of Django REST Framework views for managing Product data.
+# - `ProductPagination` sets the pagination size to 100 items per page.
+# - `ProductListCreateView` allows listing all products with pagination and creating new products, ensuring image URLs are properly formatted.
+# - `ProductDetailView` enables retrieving, updating, or deleting individual products.
+# - `ProductViewSet` provides a more comprehensive set of actions (list, create, retrieve, update, destroy) with filtering capabilities for products based on price, color, and category.
+
 from rest_framework import generics, viewsets
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
@@ -14,7 +21,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
     pagination_class = ProductPagination
 
     def perform_create(self, serializer):
-        # Update image URLs before saving the product
+        
         data = serializer.validated_data
         data['product_urls'] = self.update_image_urls(data.get('product_urls', []))
         serializer.save(**data)

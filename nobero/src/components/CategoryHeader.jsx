@@ -1,3 +1,7 @@
+/**
+ * CategoryHeader displays the category name, number of products, and a sort button.
+ * It fetches and filters products based on the selected category.
+ */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 

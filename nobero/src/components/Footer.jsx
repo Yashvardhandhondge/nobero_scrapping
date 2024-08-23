@@ -1,3 +1,9 @@
+
+/**
+ * Footer component renders the footer section of the website.
+ * It includes various sections for categories, help, company information, and social media links.
+ * It also includes a copyright notice at the bottom.
+ */
 import React from 'react';
 
 const Footer = () => {

@@ -1,3 +1,8 @@
+/**
+ * Filter component allows users to filter products based on various criteria.
+ * It includes filters for price range, color, size, neck type, sleeve length, and fit.
+ * The component fetches filtered product data from an API and updates the product list.
+ */
 import React, { useState } from 'react';
 import axios from 'axios';
 
@@ -58,7 +63,7 @@ function Filter({ setProducts }) {
                 </button>
             </div>
 
-            {/* Price Filter */}
+
             <div className="mb-4">
                 <button onClick={togglePriceOpen} className="w-full text-left flex justify-between items-center">
                     <span className="font-medium">Price</span>
@@ -137,7 +142,7 @@ function Filter({ setProducts }) {
                 )}
             </div>
 
-            {/* Neck Filter */}
+
             <div className="mb-4">
                 <button onClick={toggleNeckOpen} className="w-full text-left flex justify-between items-center">
                     <span className="font-medium">Neck</span>

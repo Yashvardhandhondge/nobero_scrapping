@@ -1,4 +1,7 @@
-# scraper/models.py
+
+# This code defines two Django models: SKU and Product.
+# - `SKU` represents individual stock-keeping units, with fields for `color` and `size`. The `__str__` method returns a string combining these attributes.
+# - `Product` represents a product with various attributes like `category`, `title`, `price`, and a JSON field for `product_urls`. It also includes optional fields for MRP, last 7-day sale count, and product attributes like fit, fabric, etc. The `available_skus` field is a many-to-many relationship with the `SKU` model, linking products to their SKUs. The `__str__` method returns the product's title.
 from django.db import models
 
 class SKU(models.Model):

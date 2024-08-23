@@ -1,3 +1,9 @@
+
+# This Scrapy spider crawls the Nobero website's Men's section, extracting detailed product data.
+# It starts by gathering category URLs, then navigates through each category to retrieve product links.
+# For each product, it extracts various details including price, images, MRP, last 7-day sales, available SKUs, and other attributes.
+
+
 import scrapy
 from urllib.parse import urljoin
 
@@ -9,29 +15,29 @@ class MenSpider(scrapy.Spider):
     ]
     
     def parse(self, response):
-        # Extract the category URLs
+        
         category_urls = response.css("#image-container[href*='/collections/']::attr(href)").getall()
     
-        # Loop through the URLs and yield them as items
+        
         for category_url in category_urls:
             absolute_url = urljoin(response.url, category_url)
             yield scrapy.Request(url=absolute_url, callback=self.parse_category)
      
     def parse_category(self, response):
-        # Extract product URLs
+        
         product_urls = response.css("a[href*='/products/']::attr(href)").getall()
         for product_url in product_urls:
             absolute_url = urljoin(response.url, product_url)
             yield scrapy.Request(url=absolute_url, callback=self.parse_product)
 
-        # Handle pagination if exists
+        
         next_page = response.css("a.next::attr(href)").get()
         if next_page:
             absolute_next_page = urljoin(response.url, next_page)
             yield scrapy.Request(url=absolute_next_page, callback=self.parse_category)
     
     def parse_product(self, response):
-        # Extract product details
+        
         product = {
             "category": self.get_category(response),
             "url": response.url,
@@ -69,10 +75,10 @@ class MenSpider(scrapy.Spider):
       sale_text = response.css(".product_bought_count span::text").get()
     
       if sale_text:
-        # Extract digits from the string using list comprehension
+        
         digits = ''.join([char for char in sale_text if char.isdigit()])
         
-        # If digits were found, convert to integer
+        
         if digits:
             return int(digits)
     
@@ -82,15 +88,15 @@ class MenSpider(scrapy.Spider):
     def extract_skus(self, response):
         skus = []
 
-        # Extract color options
+        
         color_elements = response.css('label.color-select')
         colors = [color.css('input.color-select-input::attr(value)').get() for color in color_elements]
 
-        # Extract sizes
+        
         size_elements = response.css('label.size-select::text').getall()
         sizes = [size.strip() for size in size_elements if size.strip()]
 
-        # Generate SKUs for each color
+        
         for color in colors:
             skus.append({"color": color, "size": sizes})
 
@@ -124,18 +130,18 @@ class MenSpider(scrapy.Spider):
         return formatted_description
 
     def extract_product_images(self, response):
-    # Extract URLs from srcset attribute
+    
         srcset = response.css("img[srcset*='/cdn/shop/files/']::attr(srcset)").get()
     
         if srcset:
-        # Split srcset into individual URLs and remove any duplicates
+        
             urls = [url.strip().split(' ')[0] for url in srcset.split(',')]
         
-        # Ensure all URLs are fully qualified (starting with 'http')
+        
             base_url = "https://nobero.com"
             urls = [url if url.startswith('http') else urljoin(base_url, url) for url in urls]
         else:
-        # Fallback: Extract URLs from src attribute if srcset is not available
+        
             urls = response.css("img[src*='/cdn/shop/files/']::attr(src)").getall()
             urls = list(set(urls))  # Remove duplicates
             base_url = "https://nobero.com"
