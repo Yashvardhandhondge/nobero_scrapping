@@ -17,9 +17,8 @@ Nobero E-Commerce Platform is a comprehensive web application designed to provid
 
 ### React App UI
 
-![React ]!![Uploading Screenshot 2024-08-23 190140.png…]()
-[S![Uploading Screenshot 2024-08-23 181834.png…]()
-creenshot 2024-08-23 181852](https://github.com/user-attachments/assets/76c0cc2c-92c4-4449-bf25-b12d8d444feb)
+![React ]![Screenshot 2024-08-23 190140](https://github.com/user-attachments/assets/8a948d7e-69a0-4b51-8568-82c8daaa3a46)
+
 ![Screenshot (236)](https://github.com/user-attachments/assets/36151849-fd84-49d8-b372-b906fcdc7ee4)
 ![Screenshot (237)](https://github.com/user-attachments/assets/ede4ee50-6e0a-4fb3-a4bd-f22b1efbed27)
 
