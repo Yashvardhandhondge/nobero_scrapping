@@ -1,4 +1,3 @@
-Certainly! Here’s a professional README template for your project:
 
 ---
 
@@ -145,4 +144,4 @@ For any questions or inquiries, please contact [your-email@example.com](mailto:y
 
 ---
 
-Feel free to customize the details as needed, especially in the contact and license sections!
+
