@@ -21,7 +21,7 @@ const ReadMore = () => {
         </button>
         {isOpen && (
           <div className="p-4">
-            {/* Content to show when expanded */}
+
             <p>
               Here is more information about the Oversized T-Shirts Collection...
             </p>

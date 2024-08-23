@@ -17,7 +17,7 @@ class Product(models.Model):
     product_urls = models.JSONField()
     mrp = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     last_7_day_sale = models.IntegerField(null=True, blank=True)
-    available_skus = models.ManyToManyField(SKU, related_name='products')
+    available_skus = models.ManyToManyField('products.SKU', related_name='products')
     fit = models.CharField(max_length=255, null=True, blank=True)
     fabric = models.CharField(max_length=255, null=True, blank=True)
     neck = models.CharField(max_length=255, null=True, blank=True)
@@ -28,3 +28,5 @@ class Product(models.Model):
 
     def __str__(self):
         return self.title
+
+

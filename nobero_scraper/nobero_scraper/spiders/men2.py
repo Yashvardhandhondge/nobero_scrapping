@@ -2,7 +2,7 @@ import scrapy
 from urllib.parse import urljoin
 
 class MenSpider(scrapy.Spider):
-    name = "men2"
+    name = "nobero"
     allowed_domains = ["nobero.com"]
     start_urls = [
         "https://nobero.com/pages/men"
@@ -124,10 +124,27 @@ class MenSpider(scrapy.Spider):
         return formatted_description
 
     def extract_product_images(self, response):
-        urls = response.css("img::attr(src)").getall()
-        urls = list(set(urls))  # Remove duplicates
-        urls = [url for url in urls if url.strip()]  # Remove empty URLs
+    # Extract URLs from srcset attribute
+        srcset = response.css("img[srcset*='/cdn/shop/files/']::attr(srcset)").get()
+    
+        if srcset:
+        # Split srcset into individual URLs and remove any duplicates
+            urls = [url.strip().split(' ')[0] for url in srcset.split(',')]
+        
+        # Ensure all URLs are fully qualified (starting with 'http')
+            base_url = "https://nobero.com"
+            urls = [url if url.startswith('http') else urljoin(base_url, url) for url in urls]
+        else:
+        # Fallback: Extract URLs from src attribute if srcset is not available
+            urls = response.css("img[src*='/cdn/shop/files/']::attr(src)").getall()
+            urls = list(set(urls))  # Remove duplicates
+            base_url = "https://nobero.com"
+            urls = [url if url.startswith('http') else urljoin(base_url, url) for url in urls]
+    
         return urls
+
+    
+    
 
     def parse_price(self, price_str):
         if price_str:

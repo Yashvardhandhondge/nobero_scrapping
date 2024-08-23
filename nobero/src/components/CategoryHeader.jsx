@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const CategoryHeader = ({ categoryName },) => {
+const CategoryHeader = ({ categoryName, productsLength }) => {
     const [category, setCategory] = useState({ name: categoryName, itemCount: 0 });
 
     useEffect(() => {
-        // Fetch the products data from your backend and filter by category
+        
         const fetchCategoryData = async () => {
             try {
-                const response = await axios.get('http://127.0.0.1:8000/api/products/');
-                const filteredProducts = response.data.filter(product => product.category === categoryName);
+                const response = await axios.get('http://127.0.0.1:8000/api/products/?page=1');
+                console.log(response.data);
+                
+                const filteredProducts = response.data.results.filter(product => product.category === categoryName);
                 
                 setCategory({
                     name: categoryName,
@@ -26,10 +28,10 @@ const CategoryHeader = ({ categoryName },) => {
         <div className="flex items-center justify-between py-4 px-8 bg-white shadow">
             <div className="flex flex-col">
                 <div className="text-sm text-gray-500">
-                    Home › <span className="text-black">{category.name}</span>
+                    Home › <span className="text-black">{category.name ||"All items"} </span>
                 </div>
                 <h1 className="text-2xl font-bold text-black">{category.name}</h1>
-                <span className="text-gray-500">{category.itemCount} items</span>
+                <span className="text-gray-500">{productsLength} items</span>
             </div>
             <div>
                 <button className="flex items-center border px-4 py-2 rounded-md">

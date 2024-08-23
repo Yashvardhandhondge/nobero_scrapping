@@ -4,7 +4,7 @@ import '../index.css';
 const Navbar = () => {
     return (
         <nav className="sticky top-0 z-50 flex items-center justify-between px-8 py-4 bg-white shadow">
-            {/* Logo */}
+            
             <div className="flex items-center space-x-4">
                 <img 
                     src="https://nobero.com/cdn/shop/files/Nobero_logo_1_2.svg?v=1694697396" 
@@ -13,7 +13,7 @@ const Navbar = () => {
                 />
             </div>
 
-            {/* Navigation Links */}
+            
             <ul className="flex items-center space-x-8 text-black text-sm font-medium">
                 <li><a href="#">Men</a></li>
                 <li><a href="#">Women</a></li>
@@ -23,7 +23,7 @@ const Navbar = () => {
                 <li><a href="#">Hoodies</a></li>
             </ul>
 
-            {/* Search and Icons */}
+            
             <div className="flex items-center space-x-4">
                 <div className="relative">
                     <input
@@ -46,11 +46,10 @@ const Navbar = () => {
                     alt="User Icon" 
                     className="h-6 w-6" 
                 />
-                <img 
-                    src="/path/to/cart-icon.png" 
-                    alt="Cart Icon" 
-                    className="h-6 w-6" 
-                />
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+</svg>
+
             </div>
         </nav>
     );

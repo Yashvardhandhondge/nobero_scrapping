@@ -1,16 +1,12 @@
-from rest_framework import generics
+from rest_framework import generics, viewsets
 from rest_framework.pagination import PageNumberPagination
-from .models import Product
-from .serializers import ProductSerializer
-import json
-from django.conf import settings
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
 from .models import Product
 from .serializers import ProductSerializer
+from django.conf import settings
 
 class ProductPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 100
 
 class ProductListCreateView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
@@ -25,7 +21,7 @@ class ProductListCreateView(generics.ListCreateAPIView):
 
     def update_image_urls(self, urls):
         base_url = getattr(settings, 'BASE_URL', 'https://nobero.com')
-        return [url if url.startswith('http') else base_url + url for url in urls]
+        return [url if url.startswith('https') else base_url + url for url in urls]
 
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
@@ -36,7 +32,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = {
-        'price': ['lt', 'gt'],
-        'available_skus__color': ['exact'],
+        'price': ['lt', 'gt', 'exact', 'range'],
+        'available_skus__color': ['exact', 'icontains'],
         'category': ['exact'],
     }
